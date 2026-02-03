@@ -31,14 +31,14 @@
             justify-content: center;
         }
 
-        /* Ефект сканування (сітка) - ТЕПЕР НИЖЧЕ КОНТЕНТУ */
+        /* Ефект сканування (сітка) - ШАР НИЖЧЕ */
         body::before {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 0; /* ЗНИЖЕНО */
+            z-index: 0;
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
         }
@@ -51,7 +51,7 @@
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
             background: var(--panel-bg);
             position: relative;
-            z-index: 10; /* ПІДНЯТО НА САМИЙ ВЕРХ (Клікабельно!) */
+            z-index: 10; /* ШАР ВИЩЕ (Клікабельно) */
             align-self: flex-start;
         }
 
@@ -66,20 +66,29 @@
             .tab { padding: 20px; font-size: 1.3rem; }
             .main-profile-btn { font-size: 1.1rem; padding: 20px; }
             .tel-link, .email-link { padding: 5px 10px; font-size: 1rem; }
+            
+            /* На ПК робимо заголовок великим */
+            .blink { font-size: 1.5rem !important; }
         }
 
         /* HEADER */
         .header {
             background: #110000;
             border-bottom: 2px solid var(--text-alert);
-            padding: 15px;
+            padding: 10px; /* Зменшив відступи для компактності */
             text-align: center;
         }
 
-        .blink { animation: blinker 1s linear infinite; color: var(--text-alert); font-weight: bold; font-size: 1.2rem; }
+        .blink { 
+            animation: blinker 1s linear infinite; 
+            color: var(--text-alert); 
+            font-weight: bold; 
+            font-size: 0.95rem; /* ЗМЕНШЕНО для телефону (було 1.2rem) */
+            line-height: 1.2;
+        }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        /* TABS - ЗРОБЛЕНО БІЛЬШ ЧУТЛИВИМИ */
+        /* TABS */
         .tabs { display: flex; border-bottom: 1px solid var(--text-dim); }
         .tab {
             flex: 1;
@@ -87,11 +96,11 @@
             text-align: center;
             background: #001100;
             color: var(--text-dim);
-            cursor: pointer; /* Курсор руки */
+            cursor: pointer;
             border-right: 1px solid var(--text-dim);
             font-size: 1.1rem;
             transition: 0.2s;
-            user-select: none; /* Щоб текст не виділявся при кліку */
+            user-select: none;
         }
         .tab:last-child { border-right: none; }
         .tab.active {
@@ -100,10 +109,7 @@
             font-weight: bold;
             box-shadow: inset 0 -3px 0 var(--text-main);
         }
-        .tab:hover {
-            background: #002200;
-            color: #fff;
-        }
+        .tab:hover { background: #002200; color: #fff; }
 
         /* CONTENT */
         .content { display: none; padding: 20px; }
