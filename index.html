@@ -31,14 +31,14 @@
             justify-content: center;
         }
 
-        /* Ефект сканування (сітка) */
+        /* Ефект сканування (сітка) - ТЕПЕР НИЖЧЕ КОНТЕНТУ */
         body::before {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
+            z-index: 0; /* ЗНИЖЕНО */
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
         }
@@ -51,7 +51,7 @@
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
             background: var(--panel-bg);
             position: relative;
-            z-index: 1;
+            z-index: 10; /* ПІДНЯТО НА САМИЙ ВЕРХ (Клікабельно!) */
             align-self: flex-start;
         }
 
@@ -79,7 +79,7 @@
         .blink { animation: blinker 1s linear infinite; color: var(--text-alert); font-weight: bold; font-size: 1.2rem; }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        /* TABS */
+        /* TABS - ЗРОБЛЕНО БІЛЬШ ЧУТЛИВИМИ */
         .tabs { display: flex; border-bottom: 1px solid var(--text-dim); }
         .tab {
             flex: 1;
@@ -87,10 +87,11 @@
             text-align: center;
             background: #001100;
             color: var(--text-dim);
-            cursor: pointer;
+            cursor: pointer; /* Курсор руки */
             border-right: 1px solid var(--text-dim);
             font-size: 1.1rem;
             transition: 0.2s;
+            user-select: none; /* Щоб текст не виділявся при кліку */
         }
         .tab:last-child { border-right: none; }
         .tab.active {
@@ -98,6 +99,10 @@
             color: var(--text-main);
             font-weight: bold;
             box-shadow: inset 0 -3px 0 var(--text-main);
+        }
+        .tab:hover {
+            background: #002200;
+            color: #fff;
         }
 
         /* CONTENT */
