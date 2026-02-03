@@ -25,13 +25,13 @@
             margin: 0;
             padding: 10px;
             min-height: 100vh;
-            font-size: 16px; /* Базовий розмір для мобільного */
+            font-size: 16px;
             line-height: 1.4;
             display: flex;
             justify-content: center;
         }
 
-        /* Ефект сканування (сітка) */
+        /* Ефект сканування */
         body::before {
             content: " ";
             display: block;
@@ -45,7 +45,7 @@
 
         .container {
             width: 100%;
-            max-width: 600px; /* Стандарт для мобільного */
+            max-width: 600px;
             margin: 0 auto;
             border: 1px solid var(--text-dim);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
@@ -56,21 +56,16 @@
         }
 
         /* === DESKTOP SCALING === */
-        /* Якщо ширина екрану більше 1024px (ноутбук/ПК) */
         @media (min-width: 1024px) {
-            body {
-                align-items: center; /* Центруємо по вертикалі */
-                font-size: 22px; /* Збільшуємо шрифт */
-            }
+            body { align-items: center; font-size: 20px; }
             .container {
-                max-width: 1000px; /* Розширюємо термінал */
+                max-width: 900px;
                 border-width: 2px;
                 box-shadow: 0 0 40px rgba(0, 255, 65, 0.2);
             }
-            .tab { padding: 25px; font-size: 1.5rem; }
-            .header { padding: 30px; }
-            .main-profile-btn { font-size: 1.2rem; padding: 25px; }
-            .tel-link, .email-link { padding: 8px 15px; font-size: 1.1rem; }
+            .tab { padding: 20px; font-size: 1.3rem; }
+            .main-profile-btn { font-size: 1.1rem; padding: 20px; }
+            .tel-link, .email-link { padding: 5px 10px; font-size: 1rem; }
         }
 
         /* HEADER */
@@ -179,6 +174,13 @@
         }
         .main-profile-btn:hover { background: var(--text-main); color: #000; box-shadow: 0 0 20px var(--text-main); }
 
+        .address-box {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+            padding-left: 10px;
+            border-left: 2px solid var(--text-dim);
+        }
     </style>
 </head>
 <body>
@@ -272,8 +274,11 @@
             </span>
         </div>
         <div class="data-row">
-            <span class="label">АДРЕСА (PL):</span>
-            <span>ul. Topazowa 6/53, 30-798 Kraków</span>
+            <span class="label">АДРЕСИ:</span>
+            <div class="address-box">
+                🇵🇱 ul. Topazowa 6/53, 30-798 Kraków<br>
+                🇺🇦 вул. В. Порика 11В, кв. 19, 04213 Київ
+            </div>
         </div>
     </div>
 
@@ -296,7 +301,7 @@
             <span class="label" style="color: var(--text-alert)">⚠️ ALLERGIES:</span>
             <span class="value" style="color: var(--text-alert)">
                 Household dust, sunflower pollen, wildflowers.<br>
-                <small>(History of Quincke's edema in 2013)</small>
+                <small>(2013: Quincke's edema due to dust)</small>
             </span>
         </div>
         <div class="data-row">
@@ -345,8 +350,19 @@
             <span class="value" style="font-weight:bold">ALLOWED (CPR, defibrillation, intubation)</span>
         </div>
         <div class="data-row">
-            <span class="label">CONSENT:</span>
-            <span>Family is authorized to access medical records.</span>
+            <span class="label">DOCUMENTS / IDs:</span>
+            <span style="font-size: 0.9em">
+                PESEL (PL): 78111917333<br>
+                Tax ID (UA): 2881204856<br>
+                Passport (UA): GH265383 (valid till 11.12.2033)
+            </span>
+        </div>
+        <div class="data-row">
+            <span class="label">ADDRESSES:</span>
+            <div class="address-box">
+                🇵🇱 ul. Topazowa 6/53, 30-798 Kraków<br>
+                🇺🇦 11V V. Poryka St., Apt. 19, 04213 Kyiv
+            </div>
         </div>
     </div>
 
@@ -418,12 +434,19 @@
             <span class="value" style="font-weight:bold">DOZWOLONA (RKO, defibrylacja, intubacja)</span>
         </div>
         <div class="data-row">
-            <span class="label">PESEL:</span>
-            <span class="value">78111917333</span>
+            <span class="label">DOKUMENTY / ID:</span>
+            <span style="font-size: 0.9em">
+                PESEL (PL): 78111917333<br>
+                ІПН (UA): 2881204856<br>
+                Paszport (UA): GH265383 (ważny do 11.12.2033)
+            </span>
         </div>
         <div class="data-row">
-            <span class="label">ADRES (PL):</span>
-            <span>ul. Topazowa 6/53, 30-798 Kraków</span>
+            <span class="label">ADRESY:</span>
+            <div class="address-box">
+                🇵🇱 ul. Topazowa 6/53, 30-798 Kraków<br>
+                🇺🇦 ul. W. Poryka 11W, m. 19, 04213 Kijów
+            </div>
         </div>
     </div>
 
