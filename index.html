@@ -1,38 +1,438 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,max-image-preview:none">
-  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
-  <meta name="bingbot" content="noindex,nofollow,noarchive">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ICE (In Case of Emergency) — Олексій Ровнянський Oleksii Rovnianskyi</title>
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; margin: 2rem; }
-    main { max-width: 720px; }
-    h1 { display: flex; align-items: center; gap: .5rem; }
-    .badge { display:inline-block; padding:.25rem .5rem; border-radius:.5rem; background:#ff4d4f; color:#fff; font-weight:700; }
-    ul { line-height: 1.9; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICE SYSTEM | 0scorp919</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-main: #00ff41;  /* Terminal Green */
+            --text-dim: #008f11;
+            --text-alert: #ff3333; /* Red for Critical */
+            --border-color: #333;
+            --panel-bg: #0a0a0a;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* Ефект ЕЛТ монітора (скан-лінія) */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--text-dim);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            background: var(--panel-bg);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .header {
+            background: #110000;
+            border-bottom: 2px solid var(--text-alert);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .blink { animation: blinker 1s linear infinite; color: var(--text-alert); font-weight: bold; font-size: 1.2rem; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--text-dim);
+        }
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: #001100;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-right: 1px solid var(--text-dim);
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+        .tab.active {
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-weight: bold;
+            box-shadow: inset 0 -3px 0 var(--text-main);
+        }
+
+        /* CONTENT */
+        .content { display: none; padding: 20px; }
+        .content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* SECTIONS */
+        .section-title {
+            border-bottom: 1px dashed var(--text-dim);
+            margin: 25px 0 10px 0;
+            padding-bottom: 5px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .data-row {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .label { font-size: 0.85rem; opacity: 0.7; margin-bottom: 2px; }
+        .value { font-size: 1.1rem; }
+        .value-alert { color: var(--text-alert); font-size: 1.3rem; font-weight: bold; }
+        
+        /* MEDICATIONS LIST */
+        .med-list {
+            border: 1px solid var(--text-dim);
+            padding: 10px;
+            background: rgba(0, 255, 65, 0.05);
+        }
+        .med-item { margin-bottom: 8px; }
+        .med-name { font-weight: bold; color: #fff; }
+
+        /* CONTACTS */
+        .contact-box {
+            border: 1px solid var(--text-alert);
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(50, 0, 0, 0.2);
+        }
+        .contact-name { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; display: block;}
+        
+        /* LINKS & BUTTONS */
+        a { color: inherit; text-decoration: none; }
+        .tel-link {
+            display: inline-block;
+            background: var(--text-dim);
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 5px 5px 5px 0;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .tel-link:hover { background: var(--text-main); }
+        
+        .main-profile-btn {
+            display: block;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .main-profile-btn:hover { background: var(--text-main); color: #000; }
+
+    </style>
 </head>
 <body>
-  <main>
-    <h1><span class="badge">SOS</span> ICE (In Case of Emergency) — Олексій Ровнянський Oleksii Rovnianskyi</h1>
-    <p><a href="./ICE_final.html">Відкрити повний ICE-файл</a></p>
-    <ul>
-      <li>🇺🇦 <a href="./ICE_final.html#ua">Українська версія</a></li>
-      <li>🇬🇧 <a href="./ICE_final.html#en">English version</a></li>
-      <li>🇵🇱 <a href="./ICE_final.html#pl">Wersja polska</a></li>
-    </ul>
-  <hr>
-    <h2>📩 Додатково про доступи</h2>
-    <p>
-      У поштовій скриньці <strong>scorp919@proton.me</strong> зберігається лист з усіма критичними доступами:
-      до пошти та ключів <em>YubiKey I (основний)</em> і <em>YubiKey II (резервний)</em>.
-      Якщо протягом 2 місяців я не оновлю ці дані, лист автоматично буде переданий моїм довіреним особам —
-      дружині та старшому сину.
-    </p>
 
-  </main>
+<div class="container">
+    
+    <div class="header">
+        <div class="blink">⚠️ ICE / SOS SYSTEM ⚠️</div>
+        <div style="font-size: 0.8rem; margin-top: 5px;">MEDICAL & EMERGENCY DATA</div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="openTab('UA')">UA</div>
+        <div class="tab" onclick="openTab('EN')">EN</div>
+        <div class="tab" onclick="openTab('PL')">PL</div>
+    </div>
+
+    <div id="UA" class="content active">
+        <div class="data-row">
+            <span class="label">ПІБ:</span>
+            <span class="value">Олексій Ровнянський (Oleksii Rovnianskyi)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">ДАТА НАРОДЖЕННЯ:</span>
+            <span class="value">19.11.1978 (Київ, Україна)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">ГРУПА КРОВІ:</span>
+            <span class="value value-alert">O (I) Rh+</span>
+        </div>
+
+        <div class="section-title">МЕДИЧНА ІНФОРМАЦІЯ</div>
+        
+        <div class="data-row">
+            <span class="label" style="color: var(--text-alert)">⚠️ АЛЕРГІЇ:</span>
+            <span class="value" style="color: var(--text-alert)">
+                Побутовий пил, пилок соняшника, польові квіти.<br>
+                <small>(2013: набряк Квінке через пил)</small>
+            </span>
+        </div>
+        <div class="data-row">
+            <span class="label">АНЕСТЕЗІЯ:</span>
+            <span class="value">Алергії НЕМАЄ.</span>
+        </div>
+        <div class="data-row">
+            <span class="label">ХРОНІЧНІ СТАНИ:</span>
+            <span class="value">Артеріальна гіпертензія, проблеми з печінкою.</span>
+        </div>
+
+        <div class="section-title">ПОСТІЙНІ ЛІКИ (РАНОК)</div>
+        <div class="med-list">
+            <div class="med-item">
+                <span class="med-name">1. HEPAREGEN 100 mg</span> (Timonacicum)
+            </div>
+            <div class="med-item">
+                <span class="med-name">2. IPAM (Комбінований):</span><br>
+                - Периндоприл аргінін (10 мг)<br>
+                - Індапамід (2,5 мг)<br>
+                - Амлодипін (10 мг)
+            </div>
+        </div>
+
+        <div class="section-title" style="color: var(--text-alert)">КОНТАКТИ ICE (ЕКСТРЕНІ)</div>
+        
+        <div class="contact-box">
+            <span class="contact-name">ДРУЖИНА: Олександра Ровнянська</span>
+            <a href="tel:+48508519406" class="tel-link">🇵🇱 +48 508 519 406</a>
+            <a href="tel:+380683963888" class="tel-link">🇺🇦 +38 068 396 3888</a>
+            <div style="margin-top:5px; font-size:0.8rem">✉️ lexandra919@gmail.com</div>
+        </div>
+
+        <div class="contact-box">
+            <span class="contact-name">СИН: Ярослав Ровнянський</span>
+            <a href="tel:+48516075298" class="tel-link">🇵🇱 +48 516 075 298</a>
+            <a href="tel:+380689932767" class="tel-link">🇺🇦 +38 068 993 2767</a>
+            <div style="margin-top:5px; font-size:0.8rem">✉️ jarizleifr06@gmail.com</div>
+        </div>
+
+        <div class="section-title">ДОДАТКОВО</div>
+        <div class="data-row">
+            <span class="label">РЕАНІМАЦІЯ:</span>
+            <span class="value" style="font-weight:bold">ДОЗВОЛЕНО (CPR, дефібриляція, інтубація)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">ДОКУМЕНТИ:</span>
+            <span style="font-size: 0.9rem">
+                PESEL (PL): 78111917333<br>
+                ІПН (UA): 2881204856<br>
+                Паспорт (UA): GH265383 (до 11.12.2033)
+            </span>
+        </div>
+        <div class="data-row">
+            <span class="label">АДРЕСА (PL):</span>
+            <span>ul. Topazowa 6/53, 30-798 Kraków</span>
+        </div>
+    </div>
+
+    <div id="EN" class="content">
+        <div class="data-row">
+            <span class="label">FULL NAME:</span>
+            <span class="value">Oleksii Rovnianskyi</span>
+        </div>
+        <div class="data-row">
+            <span class="label">DATE OF BIRTH:</span>
+            <span class="value">19 Nov 1978 (Kyiv, Ukraine)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">BLOOD TYPE:</span>
+            <span class="value value-alert">O (I) Rh+</span>
+        </div>
+
+        <div class="section-title">MEDICAL INFO</div>
+        
+        <div class="data-row">
+            <span class="label" style="color: var(--text-alert)">⚠️ ALLERGIES:</span>
+            <span class="value" style="color: var(--text-alert)">
+                Household dust, sunflower pollen, wildflowers.<br>
+                <small>(History of Quincke's edema in 2013)</small>
+            </span>
+        </div>
+        <div class="data-row">
+            <span class="label">ANESTHESIA:</span>
+            <span class="value">NO Known Allergies.</span>
+        </div>
+        <div class="data-row">
+            <span class="label">CHRONIC CONDITIONS:</span>
+            <span class="value">Hypertension, Liver problems.</span>
+        </div>
+
+        <div class="section-title">DAILY MEDICATION (MORNING)</div>
+        <div class="med-list">
+            <div class="med-item">
+                <span class="med-name">1. HEPAREGEN 100 mg</span> (Timonacicum)
+            </div>
+            <div class="med-item">
+                <span class="med-name">2. IPAM (Combo):</span><br>
+                - Perindopril arginine (10 mg)<br>
+                - Indapamide (2.5 mg)<br>
+                - Amlodipine (10 mg)
+            </div>
+        </div>
+
+        <div class="section-title" style="color: var(--text-alert)">EMERGENCY CONTACTS (ICE)</div>
+        
+        <div class="contact-box">
+            <span class="contact-name">WIFE: Oleksandra Rovnianska</span>
+            <a href="tel:+48508519406" class="tel-link">🇵🇱 +48 508 519 406</a>
+            <a href="tel:+380683963888" class="tel-link">🇺🇦 +38 068 396 3888</a>
+        </div>
+
+        <div class="contact-box">
+            <span class="contact-name">SON: Yaroslav Rovnianskyi</span>
+            <a href="tel:+48516075298" class="tel-link">🇵🇱 +48 516 075 298</a>
+            <a href="tel:+380689932767" class="tel-link">🇺🇦 +38 068 993 2767</a>
+        </div>
+
+        <div class="section-title">LEGAL / MISC</div>
+        <div class="data-row">
+            <span class="label">RESUSCITATION:</span>
+            <span class="value" style="font-weight:bold">ALLOWED (CPR, defibrillation, intubation)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">CONSENT:</span>
+            <span>Family is authorized to access medical records.</span>
+        </div>
+    </div>
+
+    <div id="PL" class="content">
+        <div class="data-row">
+            <span class="label">IMIĘ I NAZWISKO:</span>
+            <span class="value">Oleksii Rovnianskyi</span>
+        </div>
+        <div class="data-row">
+            <span class="label">DATA URODZENIA:</span>
+            <span class="value">19.11.1978 (Kijów, Ukraina)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">GRUPA KRWI:</span>
+            <span class="value value-alert">O (I) Rh+</span>
+        </div>
+
+        <div class="section-title">INFORMACJE MEDYCZNE</div>
+        
+        <div class="data-row">
+            <span class="label" style="color: var(--text-alert)">⚠️ ALERGIE:</span>
+            <span class="value" style="color: var(--text-alert)">
+                Kurz domowy, pyłki słonecznika, kwiaty polne.<br>
+                <small>(2013: Obrzęk Quinckego przez kurz)</small>
+            </span>
+        </div>
+        <div class="data-row">
+            <span class="label">ZNIECZULENIE:</span>
+            <span class="value">BRAK alergii.</span>
+        </div>
+        <div class="data-row">
+            <span class="label">CHOROBY PRZEWLEKŁE:</span>
+            <span class="value">Nadciśnienie tętnicze, problemy z wątrobą.</span>
+        </div>
+
+        <div class="section-title">LEKI STAŁE (RANO)</div>
+        <div class="med-list">
+            <div class="med-item">
+                <span class="med-name">1. HEPAREGEN 100 mg</span> (Timonacicum)
+            </div>
+            <div class="med-item">
+                <span class="med-name">2. IPAM (Złożony):</span><br>
+                - Perindopril arginin (10 mg)<br>
+                - Indapamid (2,5 mg)<br>
+                - Amlodypina (10 mg)
+            </div>
+        </div>
+
+        <div class="section-title" style="color: var(--text-alert)">KONTAKT ALARMOWY (ICE)</div>
+        
+        <div class="contact-box">
+            <span class="contact-name">ŻONA: Oleksandra Rovnianska</span>
+            <a href="tel:+48508519406" class="tel-link">🇵🇱 +48 508 519 406</a>
+            <a href="tel:+380683963888" class="tel-link">🇺🇦 +38 068 396 3888</a>
+        </div>
+
+        <div class="contact-box">
+            <span class="contact-name">SYN: Yaroslav Rovnianskyi</span>
+            <a href="tel:+48516075298" class="tel-link">🇵🇱 +48 516 075 298</a>
+            <a href="tel:+380689932767" class="tel-link">🇺🇦 +38 068 993 2767</a>
+        </div>
+
+        <div class="section-title">DODATKOWE</div>
+        <div class="data-row">
+            <span class="label">REANIMACJA:</span>
+            <span class="value" style="font-weight:bold">DOZWOLONA (RKO, defibrylacja, intubacja)</span>
+        </div>
+        <div class="data-row">
+            <span class="label">PESEL:</span>
+            <span class="value">78111917333</span>
+        </div>
+        <div class="data-row">
+            <span class="label">ADRES (PL):</span>
+            <span>ul. Topazowa 6/53, 30-798 Kraków</span>
+        </div>
+    </div>
+
+    <a href="https://github.com/oleksii-rovnianskyi" class="main-profile-btn">
+        🚀 OPEN MAIN PROFILE (CV / WORK)
+    </a>
+    
+    <div style="text-align:center; font-size:0.7rem; color: #333; margin-top: 20px;">
+        SECURE_ID: 0SCORP919 | UPDATED: 2026-02-03
+    </div>
+
+</div>
+
+<script>
+    function openTab(langName) {
+        // Hide all elements with class="content"
+        var x = document.getElementsByClassName("content");
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("active");
+            x[i].style.display = "none";
+        }
+        
+        // Remove "active" class from all tabs
+        var tabs = document.getElementsByClassName("tab");
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove("active");
+        }
+        
+        // Show the current tab
+        document.getElementById(langName).style.display = "block";
+        document.getElementById(langName).classList.add("active");
+        
+        // Find the button that was clicked and make it active (by text content matching is tricky via onclick, 
+        // simpler to loop through tabs and match text, or just rely on DOM order if consistent. 
+        // Here we just set the clicked tab style manually via the event target would be better, but this loop works fine)
+        // Let's just re-select based on index for simplicity in this script context:
+        if(langName == 'UA') tabs[0].classList.add("active");
+        if(langName == 'EN') tabs[1].classList.add("active");
+        if(langName == 'PL') tabs[2].classList.add("active");
+    }
+</script>
+
 </body>
 </html>
