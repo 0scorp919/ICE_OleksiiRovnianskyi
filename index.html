@@ -31,7 +31,7 @@
             justify-content: center;
         }
 
-        /* Ефект сканування */
+        /* Ефект сканування (сітка) */
         body::before {
             content: " ";
             display: block;
@@ -415,71 +415,4 @@
         
         <div class="contact-box">
             <span class="contact-name">ŻONA: Oleksandra Rovnianska</span>
-            <a href="tel:+48508519406" class="tel-link">🇵🇱 +48 508 519 406</a>
-            <a href="tel:+380683963888" class="tel-link">🇺🇦 +38 068 396 3888</a>
-            <br>
-            <a href="mailto:lexandra919@gmail.com" class="email-link">✉️ lexandra919@gmail.com</a>
-        </div>
-
-        <div class="contact-box">
-            <span class="contact-name">SYN: Yaroslav Rovnianskyi</span>
-            <a href="tel:+48516075298" class="tel-link">🇵🇱 +48 516 075 298</a>
-            <a href="tel:+380689932767" class="tel-link">🇺🇦 +38 068 993 2767</a>
-            <br>
-            <a href="mailto:jarizleifr06@gmail.com" class="email-link">✉️ jarizleifr06@gmail.com</a>
-        </div>
-
-        <div class="section-title">DODATKOWE</div>
-        <div class="data-row">
-            <span class="label">REANIMACJA:</span>
-            <span class="value" style="font-weight:bold">DOZWOLONA (RKO, defibrylacja, intubacja)</span>
-        </div>
-        <div class="data-row">
-            <span class="label">DOKUMENTY / ID:</span>
-            <span style="font-size: 0.9em">
-                PESEL (PL): 78111917333<br>
-                ІПН (UA): 2881204856<br>
-                Paszport (UA): GH265383 (ważny do 11.12.2033)
-            </span>
-        </div>
-        <div class="data-row">
-            <span class="label">ADRESY (PL):</span>
-            <div class="address-box">
-                🇵🇱 ul. Topazowa 6/53, 30-798 Kraków, Polska<br>
-                🇺🇦 ul. W. Poryka 11W, m. 19, 04208 Kijów, Ukraina
-            </div>
-        </div>
-    </div>
-
-    <a href="https://github.com/oleksii-rovnianskyi" class="main-profile-btn">
-        🚀 OPEN MAIN PROFILE (CV / WORK)
-    </a>
-    
-    <div style="text-align:center; font-size:0.7em; color: #333; margin-top: 20px; padding-bottom: 20px;">
-        SECURE_ID: 0SCORP919 | SYSTEM: ONLINE
-    </div>
-
-</div>
-
-<script>
-    function openTab(langName) {
-        var x = document.getElementsByClassName("content");
-        for (var i = 0; i < x.length; i++) {
-            x[i].classList.remove("active");
-            x[i].style.display = "none";
-        }
-        var tabs = document.getElementsByClassName("tab");
-        for (var i = 0; i < tabs.length; i++) {
-            tabs[i].classList.remove("active");
-        }
-        document.getElementById(langName).style.display = "block";
-        document.getElementById(langName).classList.add("active");
-        
-        if(langName == 'UA') tabs[0].classList.add("active");
-        if(langName == 'EN') tabs[1].classList.add("active");
-        if(langName == 'PL') tabs[2].classList.add("active");
-    }
-</script>
-
-</body>
-</html>
+            <a
